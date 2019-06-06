@@ -53,7 +53,7 @@ $service_state      =  $tomcat::params::service_state,
 $catalina_pid       =  $tomcat::params::catalina_pid,
 $xms                =  $tomcat::params::xms,
 $xmx                =  $tomcat::params::xmx,
-$maxpermsize        =  $tomcat::params:maxpermsize,
+$maxpermsize        =  $tomcat::params::maxpermsize,
 $shutdown_verbose   =  $tomcat::params::shutdown_verbose,
 $shutdown_wait      =  $tomcat::params::shutdown_wait,
 $security_manager   =  $tomcat::params::security_manager,
@@ -77,4 +77,6 @@ $tomcat_cfg_loaded  =  $tomcat::params::tomcat_cfg_loaded,
         include tomcat::install
         include tomcat::config
         include tomcat::service
+        
+    Class['::tomcat::install'] -> Class['::tomcat::config'] ~> Class['::tomcat::service']
 }
